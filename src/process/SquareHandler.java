@@ -4,18 +4,17 @@ import model.Square;
 
 public class SquareHandler {
 
-    public boolean MineCheck(Square square) {
+    public static boolean MineCheck(Square square) {
         return square.isMine();
     }
 
-    public void SquareFlagger(Square square) {
+    public static void Flagger(Square square) {
         square.setFlag(!square.isFlag());
     }
 
-    public void Unveil(Square square) {
+    public static void Reveal(Square square) {
         if (square.isHidden()) {
             square.setHidden(false);
         }
     }
-
 }
