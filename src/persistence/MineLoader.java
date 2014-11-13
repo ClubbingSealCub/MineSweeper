@@ -16,10 +16,11 @@ public class MineLoader {
             do {
                 aux1 = r.nextInt(board.getSize());
                 aux2 = r.nextInt(board.getSize());
-            } while (board.getSquare(aux1, aux2) != null && !board.getSquare(aux1, aux2).isMine());
+            } while (board.getSquare(aux1, aux2) == null || board.getSquare(aux1, aux2).isMine());
+            System.out.println(aux1+":"+aux2);
             if (board.getSquare(aux1, aux2) != null)  {
                 board.getSquare(aux1, aux2).setMine(true);
-                System.out.println(aux1+":"+aux2);
+                System.out.println("Mine Planted!");
             }
         }
     }

@@ -2,7 +2,7 @@ package model;
 
 public class Board {
 
-    private final Square[][] board;
+    private Square[][] board;
 
     public Board(int size) {
         board = new Square[size][size];
