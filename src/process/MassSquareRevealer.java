@@ -1,18 +1,23 @@
 package process;
 
+import java.awt.Color;
 import model.Square;
 
 public class MassSquareRevealer {
-    public static void RevealSquare(Square sourceSquare){
-        if(!sourceSquare.isMine()){
-            SquareHandler.Reveal(sourceSquare);
+
+    public static void RevealMassSquares(Square square) {
+        if (square.isMine()){
+            square.getSquareButton().setText("B");
+            square.getSquareButton().setBackground(Color.red);
         }
-    }
-    
-    public static void RevealMassSquares(Square sourceSquare) {
-        for (Square square : sourceSquare.getAdjacent()) {
-            if (!square.isMine() && !square.isHidden()) {
-                RevealMassSquares(square);
+        if (!square.isMine() && square.isHidden()) {
+            SquareHandler.Reveal(square);
+            square.getSquareButton().setText(Integer.toString(MineLocator.LocateNearbyMines(square)));
+            square.getSquareButton().setBackground(Color.GRAY);
+            if (MineLocator.LocateNearbyMines(square) == 0) {
+                square.getAdjacent().stream().forEach((sq) -> {
+                    RevealMassSquares(sq);
+                });
             }
         }
     }

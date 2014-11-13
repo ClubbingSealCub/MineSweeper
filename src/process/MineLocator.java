@@ -1,17 +1,14 @@
 package process;
 
+import java.util.ArrayList;
 import model.Square;
 
 public class MineLocator {
 
-    public int LocateNearbyMines(Square square) {
+    public static int LocateNearbyMines(Square square) {
         int counter = 0;
-        Square[] adjacentSquares = square.getAdjacent();
-        for (Square adjacentSquare : adjacentSquares) {
-            if (adjacentSquare.isMine()) {
-                counter++;
-            }
-        }
+        ArrayList<Square> adjacentSquares = square.getAdjacent();
+        counter = adjacentSquares.stream().filter((adjacentSquare) -> (adjacentSquare.isMine())).map((_item) -> 1).reduce(counter, Integer::sum);
         return counter;
     }
 }

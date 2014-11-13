@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import javax.swing.JButton;
 
 public class Square {
 
@@ -8,6 +9,7 @@ public class Square {
     private boolean flag;
     private boolean hidden;
     private final ArrayList<Square> adjacent;
+    JButton squareButton;
     
     public Square() {
         hidden = true;
@@ -15,13 +17,21 @@ public class Square {
         flag = false;
         adjacent = new ArrayList();
     }
-    
-    public void addAdjacent(Square square2){
-        adjacent.add(square2);
+
+    public void setSquareButton(JButton squareButton) {
+        this.squareButton = squareButton;
+    }
+
+    public JButton getSquareButton() {
+        return squareButton;
     }
     
-    public Square[] getAdjacent(){
-        return (Square[]) adjacent.toArray();
+    public void addAdjacent(Square adjSquare){
+        adjacent.add(adjSquare);
+    }
+    
+    public ArrayList<Square> getAdjacent(){
+        return adjacent;
     }
     
     public boolean isMine() {

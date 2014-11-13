@@ -3,13 +3,14 @@ package process;
 import model.Square;
 
 public class AdjacentSquareSetter {
-    public void setAdjacentSquares(Square[][] board){
+
+    public static void setAdjacentSquares(Square[][] board) {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
-                for (int k = -1; k < 2; k++) {
-                    for (int l = -1; l < 2; l++) {
-                        if(i+k < board.length && i+k > -1 && j+l < board.length && j+l > -1 && (k!=0 && l!=0)){
-                            board[k][l].addAdjacent(board[i+k][j+l]);
+                for (int k = i - 1; k < i + 2; k++) {
+                    for (int l = j - 1; l < j + 2; l++) {
+                        if (k > -1 && l > -1 && k < board.length && l < board.length) {
+                            board[i][j].addAdjacent(board[k][l]);
                         }
                     }
                 }
@@ -17,3 +18,4 @@ public class AdjacentSquareSetter {
         }
     }
 }
+
