@@ -4,7 +4,7 @@ import model.Square;
 
 public class MassSquareRevealer {
 
-    public void RevealMassSquares(Square sourceSquare) {
+    public static void RevealMassSquares(Square sourceSquare) {
         if (!sourceSquare.isMine()) {
             SquareHandler.Reveal(sourceSquare);
         }
