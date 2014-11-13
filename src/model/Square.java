@@ -1,18 +1,19 @@
 package model;
 
-import java.util.Set;
+import java.util.ArrayList;
 
 public class Square {
 
     private boolean mine;
     private boolean flag;
     private boolean hidden;
-    private Set<Square> adjacent;
+    private final ArrayList<Square> adjacent;
     
     public Square() {
         hidden = true;
         mine = false;
         flag = false;
+        adjacent = new ArrayList();
     }
     
     public void addAdjacent(Square square2){

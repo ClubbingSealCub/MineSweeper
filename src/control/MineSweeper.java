@@ -1,16 +1,21 @@
 package control;
 
-import model.Board;
+import model.Square;
 import persistence.MineLoader;
 import process.ButtonGridMaker;
 
 public class MineSweeper {
 
     public static void main(String[] args) {
-        Board board = new Board(8);
+        Square[][] board = new Square[8][8];
+        for (Square[] board1 : board) {
+            for (int j = 0; j < board.length; j++) {
+                board1[j] = new Square();
+            }
+        }
+        if((board[1][1])==null) System.out.println("Nulo");
         ButtonGridMaker buttonGrid = new ButtonGridMaker(8, 8, board);
-        MineLoader mineLoader = new MineLoader();
-        mineLoader.FillBoard(board, 10);
+        MineLoader.FillBoard(board, 10);
     }
 
 }

@@ -1,13 +1,13 @@
 package process;
 
-import model.Board;
+import model.Square;
 
 public class WinStateChecker {
-    public static boolean WinCheck(Board board) {
+    public static boolean WinCheck(Square[][] board) {
         int hiddenSquareCounter = 0;
-        for (int i = 0; i < board.getSize(); i++) {
-            for (int j = 0; j < board.getSize(); j++) {
-                if (board.getSquare(i, j).isHidden()) {
+        for (Square[] board1 : board) {
+            for (Square board11 : board1) {
+                if (board11.isHidden()) {
                     hiddenSquareCounter++;
                 }
             }

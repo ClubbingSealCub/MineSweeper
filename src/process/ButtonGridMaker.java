@@ -5,16 +5,15 @@ import javax.swing.JButton; //imports JButton library
 import java.awt.GridLayout; //imports GridLayout library
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.Board;
+import model.Square;
 
 public class ButtonGridMaker implements ActionListener {
 
     JFrame frame = new JFrame("MineSweeper"); //creates frame
     JButton[][] grid; //names the grid of buttons
-    Board board;
-    
-    public ButtonGridMaker(int width, int length, Board sourceBoard) { //constructor
-        this.board = sourceBoard;
+    Square[][] board;
+    public ButtonGridMaker(int width, int length, Square[][] sourceBoard) { //constructor
+        board = sourceBoard;
         frame.setLayout(new GridLayout(width, length)); //set layout
         grid = new JButton[width][length]; //allocate the size of grid
         for (int y = 0; y < length; y++) {
@@ -35,7 +34,7 @@ public class ButtonGridMaker implements ActionListener {
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
                 if(src==grid[x][y]){
-                    MassSquareRevealer.RevealMassSquares(board.getSquare(x, y));
+                    MassSquareRevealer.RevealMassSquares(board[x][y]);
                     WinStateChecker.WinCheck(board);
                 }
             }
