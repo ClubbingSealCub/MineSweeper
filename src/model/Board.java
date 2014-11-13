@@ -5,7 +5,7 @@ public class Board {
     private final Square[][] board;
 
     public Board(int size) {
-        board = new Square[8][8];
+        board = new Square[size][size];
     }
 
     public int getSize() {
@@ -13,13 +13,6 @@ public class Board {
     }
 
     public Square getSquare(int pos1, int pos2) {
-        if (pos1 < board.length && pos2 < board.length) {
-            return board[pos1][pos2];
-        } else {
-            return null;
-        }
+        return board[pos1][pos2];
     }
-
-    
-
 }

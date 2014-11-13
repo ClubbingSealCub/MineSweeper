@@ -11,6 +11,8 @@ public class Square {
     
     public Square() {
         hidden = true;
+        mine = false;
+        flag = false;
     }
     
     public void addAdjacent(Square square2){

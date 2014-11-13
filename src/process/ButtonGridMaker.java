@@ -36,6 +36,7 @@ public class ButtonGridMaker implements ActionListener {
             for (int y = 0; y < grid[x].length; y++) {
                 if(src==grid[x][y]){
                     MassSquareRevealer.RevealMassSquares(board.getSquare(x, y));
+                    WinStateChecker.WinCheck(board);
                 }
             }
         }

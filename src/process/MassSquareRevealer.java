@@ -3,13 +3,15 @@ package process;
 import model.Square;
 
 public class MassSquareRevealer {
-
-    public static void RevealMassSquares(Square sourceSquare) {
-        if (!sourceSquare.isMine()) {
+    public static void RevealSquare(Square sourceSquare){
+        if(!sourceSquare.isMine()){
             SquareHandler.Reveal(sourceSquare);
         }
+    }
+    
+    public static void RevealMassSquares(Square sourceSquare) {
         for (Square square : sourceSquare.getAdjacent()) {
-            if (!square.isMine()) {
+            if (!square.isMine() && !square.isHidden()) {
                 RevealMassSquares(square);
             }
         }
