@@ -1,6 +1,5 @@
 package ui;
 
-import control.MineSweeper;
 import java.awt.Dimension;
 import javax.swing.JFrame; //imports JFrame library
 import javax.swing.JButton; //imports JButton library
@@ -8,10 +7,10 @@ import java.awt.GridLayout; //imports GridLayout library
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import model.Square;
 import process.LoseStateChecker;
 import process.MassSquareRevealer;
+import process.MineRevealer;
 import process.WinStateChecker;
 
 public class MineSweeperUI implements ActionListener {
@@ -56,13 +55,10 @@ public class MineSweeperUI implements ActionListener {
                     MassSquareRevealer.RevealMassSquares(board[x][y]);
                     if (LoseStateChecker.LoseCheck(board[x][y])) {
                         JOptionPane.showMessageDialog(frame, "Whoops! You stepped on a mine!", "Game Over", JOptionPane.ERROR_MESSAGE);
-                        MineSweeperUI.Dispose();
-                        MineSweeper.startGame(MineSweeper.getDifficulty());
+                        MineRevealer.RevealMines(board);
                     }
                     if (WinStateChecker.WinCheck(board)) {
                         JOptionPane.showMessageDialog(frame, "You won! Congratulations!", "Game Over", JOptionPane.PLAIN_MESSAGE);
-                        MineSweeperUI.Dispose();
-                        MineSweeper.startGame(MineSweeper.getDifficulty());
                     }
                 }
             }
