@@ -51,7 +51,7 @@ public class MineSweeperUI implements ActionListener {
         JButton src = (JButton) e.getSource();
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
-                if (src == grid[x][y]) {
+                if (src == grid[x][y] && board[x][y].isHidden()) {
                     MassSquareRevealer.RevealMassSquares(board[x][y]);
                     if (LoseStateChecker.LoseCheck(board[x][y])) {
                         JOptionPane.showMessageDialog(frame, "Whoops! You stepped on a mine!", "Game Over", JOptionPane.ERROR_MESSAGE);
