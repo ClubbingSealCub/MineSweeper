@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Square;
+import presenter.MineSweeper;
 import process.LoseStateChecker;
 import process.MassSquareRevealer;
 import process.MineRevealer;
@@ -51,14 +52,16 @@ public class MineSweeperUI implements ActionListener {
         JButton src = (JButton) e.getSource();
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
-                if (src == grid[x][y] && board[x][y].isHidden()) {
+                if (src == grid[x][y] && board[x][y].isHidden() && MineSweeper.isGameState()) {
                     MassSquareRevealer.RevealMassSquares(board[x][y]);
                     if (LoseStateChecker.LoseCheck(board[x][y])) {
                         JOptionPane.showMessageDialog(frame, "Whoops! You stepped on a mine!", "Game Over", JOptionPane.ERROR_MESSAGE);
                         MineRevealer.RevealMines(board);
+                        MineSweeper.setGameState(false);
                     }
                     if (WinStateChecker.WinCheck(board)) {
                         JOptionPane.showMessageDialog(frame, "You won! Congratulations!", "Game Over", JOptionPane.PLAIN_MESSAGE);
+                        MineSweeper.setGameState(false);
                     }
                 }
             }

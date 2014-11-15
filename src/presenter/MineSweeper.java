@@ -1,4 +1,4 @@
-package control;
+package presenter;
 
 import model.Square;
 import persistence.MineLoader;
@@ -6,6 +6,7 @@ import process.AdjacentSquareSetter;
 import ui.MineSweeperUI;
 public class MineSweeper {
     static String difficulty = "Beginner";
+    static boolean gameState = true; 
     
     public static void setDifficulty(String sDifficulty) {
         difficulty = sDifficulty;
@@ -15,9 +16,18 @@ public class MineSweeper {
         return difficulty;
     }
 
+    public static boolean isGameState() {
+        return gameState;
+    }
+
+    public static void setGameState(boolean gameState) {
+        MineSweeper.gameState = gameState;
+    }
+        
     public static void startGame(String difficulty) {
         int size=8;
         int mines=10;
+        setGameState(true);
         switch(difficulty) {
             case "Beginner":
                 size = 8;

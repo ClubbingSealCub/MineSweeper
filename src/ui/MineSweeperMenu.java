@@ -1,6 +1,6 @@
 package ui;
 
-import control.MineSweeper;
+import presenter.MineSweeper;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import javax.swing.ButtonGroup;
