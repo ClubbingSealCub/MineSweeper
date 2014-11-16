@@ -1,8 +1,7 @@
 package presenter;
 
 import model.Square;
-import process.AdjacentSquareSetter;
-import ui.MineSweeperUI;
+import view.MineSweeperUI;
 
 public class MineSweeper {
 

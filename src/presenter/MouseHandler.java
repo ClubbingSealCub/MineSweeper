@@ -1,4 +1,4 @@
-package process;
+package presenter;
 
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
@@ -25,7 +25,7 @@ public class MouseHandler {
                             MineSweeper.setNoClicksYet(false);
                         }
                         MassSquareRevealer.RevealMassSquares(board[x][y]);
-                        if (LoseStateChecker.LoseCheck(board[x][y])) {
+                        if (SquareHandler.MineCheck(board[x][y])) {
                             JOptionPane.showMessageDialog(frame, "Whoops! You stepped on a mine!", "Game Over", JOptionPane.ERROR_MESSAGE);
                             MineRevealer.RevealMines(board);
                             MineSweeper.setGameState(false);

@@ -1,4 +1,4 @@
-package ui;
+package view;
 
 import java.awt.Dimension;
 import javax.swing.JFrame; //imports JFrame library
@@ -7,7 +7,7 @@ import java.awt.GridLayout; //imports GridLayout library
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import model.Square;
-import process.MouseHandler;
+import presenter.MouseHandler;
 
 public class MineSweeperUI implements MouseListener {
 

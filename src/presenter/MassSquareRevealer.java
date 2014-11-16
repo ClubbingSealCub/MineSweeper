@@ -1,4 +1,4 @@
-package process;
+package presenter;
 
 import java.awt.Color;
 import model.Square;

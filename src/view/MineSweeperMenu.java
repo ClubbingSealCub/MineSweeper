@@ -1,4 +1,4 @@
-package ui;
+package view;
 
 import presenter.MineSweeper;
 import java.awt.event.ActionEvent;
@@ -10,7 +10,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
-import process.ExitAction;
+import presenter.ExitAction;
 
 public class MineSweeperMenu {
 
