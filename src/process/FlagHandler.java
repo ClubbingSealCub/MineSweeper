@@ -9,6 +9,7 @@ public class FlagHandler {
             square.setFlag(false);
             square.getSquareButton().setText(null);
         } else {
+            square.setFlag(true);
             square.getSquareButton().setText("F");
         }
     }
