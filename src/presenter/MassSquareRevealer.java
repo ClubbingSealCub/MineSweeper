@@ -1,8 +1,6 @@
 package presenter;
 
-import java.awt.Color;
 import model.Square;
-import presenter.MineSweeper;
 
 public class MassSquareRevealer {
 
