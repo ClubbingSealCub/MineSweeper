@@ -44,8 +44,6 @@ public class MineSweeper {
     }
 
     public static void startGame(String difficulty) {
-        setSize(8);
-        setMines(10);
         setGameState(true);
         setNoClicksYet(true);
         switch (difficulty) {
