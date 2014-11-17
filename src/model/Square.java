@@ -8,6 +8,7 @@ public class Square {
     private boolean mine;
     private boolean flag;
     private boolean hidden;
+    private boolean question;
     private final ArrayList<Square> adjacent;
     JButton squareButton;
     
@@ -15,7 +16,16 @@ public class Square {
         hidden = true;
         mine = false;
         flag = false;
+        question = false;
         adjacent = new ArrayList();
+    }
+
+    public boolean isQuestion() {
+        return question;
+    }
+
+    public void setQuestion(boolean question) {
+        this.question = question;
     }
 
     public void setSquareButton(JButton squareButton) {

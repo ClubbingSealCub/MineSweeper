@@ -5,11 +5,11 @@ import view.MineSweeperUI;
 
 public class MineSweeper {
 
-    static String difficulty = "Beginner";
-    static boolean gameState = true;
-    static boolean noClicksYet = true;
-    static int mines = 10;
-    static int size = 8;
+    private static String difficulty = "Beginner";
+    private static boolean gameState = true;
+    private static boolean noClicksYet = true;
+    private static int mines = 10;
+    private static int size = 8;
 
     public static int getMines() {
         return mines;

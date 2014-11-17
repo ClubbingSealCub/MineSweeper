@@ -11,35 +11,35 @@ import presenter.MouseHandler;
 
 public class MineSweeperUI implements MouseListener {
 
-    static JFrame frame; //creates frame
-    JButton[][] grid; //names the grid of buttons
+    static JFrame frame; 
+    JButton[][] grid;
     Square[][] board;
 
     public static void Dispose() {
         frame.dispose();
     }
 
-    public MineSweeperUI(int width, int length, Square[][] sourceBoard) { //constructor
+    public MineSweeperUI(int width, int length, Square[][] sourceBoard) {
         frame = new JFrame("MineSweeper");
         board = sourceBoard;
-        frame.setLayout(new GridLayout(width, length)); //set layout
+        frame.setLayout(new GridLayout(width, length));
         frame.setPreferredSize(new Dimension(width * 44, length * 44));
         frame.setResizable(false);
         frame.setJMenuBar(MineSweeperMenu.menuBar());
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        grid = new JButton[width][length]; //allocate the size of grid
+        grid = new JButton[width][length];
         for (int y = 0; y < length; y++) {
             for (int x = 0; x < width; x++) {
-                grid[x][y] = new JButton(""); //creates new button
+                grid[x][y] = new JButton("");
                 board[x][y].setSquareButton(grid[x][y]);
                 grid[x][y].setSize(10, 10);
-                frame.add(grid[x][y]); //adds button to grid
+                frame.add(grid[x][y]);
                 grid[x][y].addMouseListener(this);
             }
         }
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack(); //sets appropriate size for frame
-        frame.setVisible(true); //makes frame visible
+        frame.pack();
+        frame.setVisible(true);
     }
 
     @Override

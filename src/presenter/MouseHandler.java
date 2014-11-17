@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import model.Square;
-import presenter.MineSweeper;
 
 public class MouseHandler {
     public static void HandleMouse(MouseEvent e, JButton[][] grid, Square[][] board, JFrame frame){
@@ -15,7 +14,7 @@ public class MouseHandler {
             for (int y = 0; y < grid[x].length; y++) {
                 if (src == grid[x][y] && board[x][y].isHidden() && MineSweeper.isGameState()) {
                     if (SwingUtilities.isRightMouseButton(e)) {
-                        FlagHandler.Flag(board[x][y]);
+                        FlagAndQuestionHandler.FlagAndQuestion(board[x][y]);
                     }
                     if (SwingUtilities.isLeftMouseButton(e)) {
                         if(MineSweeper.isNoClicksYet()){
