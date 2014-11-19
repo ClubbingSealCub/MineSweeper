@@ -13,7 +13,7 @@ public class MineLoader {
             do {
                 aux1 = r.nextInt(board.length);
                 aux2 = r.nextInt(board.length);
-            } while ((board[aux1][aux2].isMine()) || !board[aux1][aux2].isHidden());
+            } while ((board[aux1][aux2].isMine()) || !board[aux1][aux2].getState().equals("hidden"));
             System.out.print(aux1 + ":" + aux2 + " ");
             board[aux1][aux2].setMine(true);
 

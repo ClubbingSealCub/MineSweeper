@@ -1,49 +1,15 @@
 package model;
 
 import java.util.ArrayList;
-import javax.swing.JButton;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Square {
 
     private boolean mine;
-    private boolean flag;
-    private boolean hidden;
-    private boolean question;
+    State state;
     private final ArrayList<Square> adjacent;
-    JButton squareButton;
-    
-    public Square() {
-        hidden = true;
-        mine = false;
-        flag = false;
-        question = false;
-        adjacent = new ArrayList();
-    }
 
-    public boolean isQuestion() {
-        return question;
-    }
-
-    public void setQuestion(boolean question) {
-        this.question = question;
-    }
-
-    public void setSquareButton(JButton squareButton) {
-        this.squareButton = squareButton;
-    }
-
-    public JButton getSquareButton() {
-        return squareButton;
-    }
-    
-    public void addAdjacent(Square adjSquare){
-        adjacent.add(adjSquare);
-    }
-    
-    public ArrayList<Square> getAdjacent(){
-        return adjacent;
-    }
-    
     public boolean isMine() {
         return mine;
     }
@@ -52,20 +18,69 @@ public class Square {
         this.mine = mine;
     }
 
-    public boolean isFlag() {
-        return flag;
+    private enum State {HIDDEN, REVEALED, FLAGGED, QUESTION};
+
+   
+    public Square() {
+        state = State.HIDDEN;
+        mine = false;
+        adjacent = new ArrayList();
     }
 
-    public void setFlag(boolean flag) {
-        this.flag = flag;
+    public String getState() {
+        return state.toString();
     }
 
-    public boolean isHidden() {
-        return hidden;
+    public void setState(String newState) throws Exception {
+        newState = newState.toUpperCase();
+        switch(newState){
+            case "HIDDEN":
+                state = State.HIDDEN;
+                break;
+            case "REVEALED":
+                state = State.REVEALED;
+                break;
+            case "FLAGGED":
+                state = State.FLAGGED;
+                break;
+            case "QUESTION":
+                state = State.QUESTION;
+                break;
+            default:
+                throw new Exception("Not a state");
+        }
     }
 
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
+    public void revealEnMasse() throws Exception {
+        if (this.isMine()) {
+            setState("REVEALED");
+        }
+        if (this.isMine() && getState().equals("HIDDEN")) {
+            setState("REVEALED");
+            if (getNearbyMines() == 0) {
+                getAdjacent().stream().forEach((sq) -> {
+                    try {
+                        revealEnMasse();
+                    } catch (Exception ex) {
+                        Logger.getLogger(Square.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+            }
+        }
+    }
+
+    public void addAdjacent(Square adjSquare) {
+        adjacent.add(adjSquare);
+    }
+
+    public ArrayList<Square> getAdjacent() {
+        return adjacent;
+    }
+
+    public int getNearbyMines() {
+        int counter = 0;
+        //contar minas
+        return counter;
     }
 
 }

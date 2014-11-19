@@ -1,20 +1,20 @@
 package presenter;
 
+import javax.swing.JButton;
 import model.Square;
 
 public class FlagAndQuestionHandler {
 
-    public static void FlagAndQuestion(Square square) {
-        if (square.isFlag()) {
-            square.setFlag(false);
-            square.setQuestion(true);
-            square.getSquareButton().setText("?");
-        } else if (square.isQuestion()){
-            square.setQuestion(false);
-            square.getSquareButton().setText(null);
+    public static void FlagAndQuestion(Square square, JButton button) throws Exception {
+        if (square.getState().equals("flagged")) {
+            square.setState("QUESTION");
+            button.setText("?");
+        } else if (square.getState().equals("QUESTION")){
+            square.setState("HIDDEN");
+            button.setText(null);
         } else {
-            square.setFlag(true);
-            square.getSquareButton().setText("F");
+            square.setState("FLAGGED");
+            button.setText("F");
         }
     }
 }
