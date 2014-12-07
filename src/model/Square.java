@@ -18,9 +18,11 @@ public class Square {
         this.mine = mine;
     }
 
-    private enum State {HIDDEN, REVEALED, FLAGGED, QUESTION};
+    private enum State {
 
-   
+        HIDDEN, REVEALED, FLAGGED, QUESTION
+    };
+
     public Square() {
         state = State.HIDDEN;
         mine = false;
@@ -33,7 +35,7 @@ public class Square {
 
     public void setState(String newState) throws Exception {
         newState = newState.toUpperCase();
-        switch(newState){
+        switch (newState) {
             case "HIDDEN":
                 state = State.HIDDEN;
                 break;
@@ -52,15 +54,12 @@ public class Square {
     }
 
     public void revealEnMasse() throws Exception {
-        if (this.isMine()) {
-            setState("REVEALED");
-        }
-        if (this.isMine() && getState().equals("HIDDEN")) {
+        if (getState().equals("HIDDEN")) {
             setState("REVEALED");
             if (getNearbyMines() == 0) {
                 getAdjacent().stream().forEach((sq) -> {
                     try {
-                        revealEnMasse();
+                        sq.revealEnMasse();
                     } catch (Exception ex) {
                         Logger.getLogger(Square.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -79,7 +78,7 @@ public class Square {
 
     public int getNearbyMines() {
         int counter = 0;
-        //contar minas
+        counter = adjacent.stream().filter((square) -> (square.isMine())).map((_item) -> 1).reduce(counter, Integer::sum);
         return counter;
     }
 

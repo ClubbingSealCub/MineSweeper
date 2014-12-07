@@ -8,13 +8,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.CellButton;
 import model.Square;
 import presenter.MouseHandler;
 
 public class MineSweeperUI implements MouseListener {
 
     static JFrame frame;
-    JButton[][] grid;
+    CellButton[][] grid;
     Square[][] board;
 
     public static void Dispose() {
@@ -29,10 +30,10 @@ public class MineSweeperUI implements MouseListener {
         frame.setResizable(false);
         frame.setJMenuBar(MineSweeperMenu.menuBar());
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        grid = new JButton[width][length];
+        grid = new CellButton[width][length];
         for (int y = 0; y < length; y++) {
             for (int x = 0; x < width; x++) {
-                grid[x][y] = new JButton("");
+                grid[x][y] = new CellButton();
                 grid[x][y].setSize(10, 10);
                 frame.add(grid[x][y]);
                 grid[x][y].addMouseListener(this);
