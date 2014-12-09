@@ -1,23 +1,22 @@
 package presenter;
 
-import model.CellButton;
 import model.Square;
 
 public class FlagAndQuestionHandler {
 
-    public static void FlagAndQuestion(Square square, CellButton cell) throws Exception {
+    public static void FlagAndQuestion(Square square) throws Exception {
         switch (square.getState()) {
             case "FLAGGED":
                 square.setState("QUESTION");
-                cell.question();
+                square.question();
                 break;
             case "QUESTION":
                 square.setState("HIDDEN");
-                cell.setText(null);
+                square.setText(null);
                 break;
             default:
                 square.setState("FLAGGED");
-                cell.flag();
+                square.flag();
                 break;
         }
     }

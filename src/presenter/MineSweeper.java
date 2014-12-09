@@ -1,20 +1,14 @@
 package presenter;
 
-import model.CellButton;
 import model.Square;
 import view.MineSweeperUI;
 
 public class MineSweeper {
 
     private static Square[][] board;
-    private static CellButton[][] grid;
 
-    public static CellButton[][] getGrid() {
-        return grid;
-    }
-
-    public static void setGrid(CellButton[][] grid) {
-        MineSweeper.grid = grid;
+    public static void setBoard(Square[][] board) {
+        MineSweeper.board = board;
     }
     private static String difficulty = "Beginner";
     private static boolean gameState = true;
@@ -96,4 +90,5 @@ public class MineSweeper {
     public static Square[][] getBoard() {
         return board;
     }
+
 }

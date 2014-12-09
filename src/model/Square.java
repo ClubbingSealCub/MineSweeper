@@ -1,10 +1,12 @@
 package model;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 
-public class Square {
+public class Square extends JButton {
 
     private boolean mine;
     State state;
@@ -80,6 +82,27 @@ public class Square {
         int counter = 0;
         counter = adjacent.stream().filter((square) -> (square.isMine())).map((_item) -> 1).reduce(counter, Integer::sum);
         return counter;
+    }
+    
+     public void setMine() {
+        this.setText("B");
+        this.setBackground(Color.RED);
+    }
+
+    public void reveal(Square square) throws Exception {
+        if (!square.isMine()) {
+            this.setText(Integer.toString(square.getNearbyMines()));
+            this.setBackground(Color.GRAY);
+        }
+        else setMine();
+    }
+
+    public void flag() throws Exception {
+        this.setText("F");
+    }
+
+    public void question() throws Exception {
+        this.setText("?");
     }
 
 }
