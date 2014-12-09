@@ -7,21 +7,23 @@ import model.Square;
 
 public class MassSquareRevealer {
 
-    public static void RevealMassSquares(Square square) throws Exception {
+    public static void RevealMassSquares(Square square, CellButton cell) throws Exception {
         if (MineSweeper.isGameState()) {
             if (square.isMine()) {
                 square.setState("REVEALED");
+                cell.reveal(square);
             }
             if (!square.isMine() && "HIDDEN".equals(square.getState())) {
                 square.setState("REVEALED");
+                cell.reveal(square);
                 if (square.getNearbyMines() == 0) {
-                    square.getAdjacent().stream().forEach((sq) -> {
+                    for (int i = 0; i < square.getAdjacent().size(); i++) {
                         try {
-                            RevealMassSquares(sq);
+                            RevealMassSquares(square.getAdjacent().get(i), cell.getAdjacent().get(i));
                         } catch (Exception ex) {
                             Logger.getLogger(MassSquareRevealer.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    });
+                    }
                 }
             }
         }

@@ -1,16 +1,24 @@
 package presenter;
 
+import model.CellButton;
 import model.Square;
 
 public class FlagAndQuestionHandler {
 
-    public static void FlagAndQuestion(Square square) throws Exception {
-        if (square.getState().equals("flagged")) {
-            square.setState("QUESTION");
-        } else if (square.getState().equals("QUESTION")){
-            square.setState("HIDDEN");
-        } else {
-            square.setState("FLAGGED");
+    public static void FlagAndQuestion(Square square, CellButton cell) throws Exception {
+        switch (square.getState()) {
+            case "FLAGGED":
+                square.setState("QUESTION");
+                cell.question();
+                break;
+            case "QUESTION":
+                square.setState("HIDDEN");
+                cell.setText(null);
+                break;
+            default:
+                square.setState("FLAGGED");
+                cell.flag();
+                break;
         }
     }
 }

@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.CellButton;
 import model.Square;
+import presenter.AdjacentSquareAndButtonSetter;
+import presenter.MineSweeper;
 import presenter.MouseHandler;
 
 public class MineSweeperUI implements MouseListener {
@@ -39,6 +41,7 @@ public class MineSweeperUI implements MouseListener {
                 grid[x][y].addMouseListener(this);
             }
         }
+        AdjacentSquareAndButtonSetter.setAdjacentButtons(grid);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -46,10 +49,12 @@ public class MineSweeperUI implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        try {
-            MouseHandler.HandleMouse(e, grid, board, frame);
-        } catch (Exception ex) {
-            Logger.getLogger(MineSweeperUI.class.getName()).log(Level.SEVERE, null, ex);
+        if (MineSweeper.isGameState()) {
+            try {
+                MouseHandler.HandleMouse(e, grid, board, frame);
+            } catch (Exception ex) {
+                Logger.getLogger(MineSweeperUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

@@ -43,7 +43,7 @@ public class MineSweeper {
         MineSweeper.gameState = gameState;
     }
 
-    public static void startGame(String difficulty) {
+    public static void startGame(String difficulty) throws Exception {
         setGameState(true);
         setNoClicksYet(true);
         switch (difficulty) {
@@ -66,7 +66,7 @@ public class MineSweeper {
                 board1[j] = new Square();
             }
         }
-        AdjacentSquareSetter.setAdjacentSquares(board);
+        AdjacentSquareAndButtonSetter.setAdjacentSquares(board);
         MineSweeperUI buttonGrid = new MineSweeperUI(getSize(), getSize(), board);
     }
 
@@ -78,7 +78,7 @@ public class MineSweeper {
         MineSweeper.noClicksYet = noClicksYet;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         startGame(difficulty);
     }
 }

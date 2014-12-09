@@ -1,14 +1,26 @@
 package model;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JButton;
 
 public class CellButton extends JButton {
+    
+    private final ArrayList<CellButton> adjacent;
 
     public CellButton() {
         super();
+        adjacent = new ArrayList<>();
+    }
+    
+    public void addAdjacent(CellButton adjButton) {
+        adjacent.add(adjButton);
     }
 
+    public ArrayList<CellButton> getAdjacent() {
+        return adjacent;
+    }
+    
     public void setMine() {
         this.setText("B");
         this.setBackground(Color.RED);

@@ -2,6 +2,8 @@ package view;
 
 import presenter.MineSweeper;
 import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Action;
 import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
@@ -46,7 +48,11 @@ public class MineSweeperMenu {
         helpMenu.add(howToPlay);
         newGame.addActionListener((ActionEvent e) -> {
             MineSweeperUI.Dispose();
-            MineSweeper.startGame(MineSweeper.getDifficulty());
+            try {
+                MineSweeper.startGame(MineSweeper.getDifficulty());
+            } catch (Exception ex) {
+                Logger.getLogger(MineSweeperMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         beginner.addActionListener((ActionEvent e) -> {
             MineSweeper.setDifficulty("Beginner");
