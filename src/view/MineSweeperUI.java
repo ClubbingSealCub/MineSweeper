@@ -14,7 +14,7 @@ import presenter.AdjacentSquareAndButtonSetter;
 import presenter.MineSweeper;
 import presenter.MouseHandler;
 
-public class MineSweeperUI implements MouseListener {
+public class MineSweeperUI {
 
     static JFrame frame;
     CellButton[][] grid;
@@ -33,12 +33,45 @@ public class MineSweeperUI implements MouseListener {
         frame.setJMenuBar(MineSweeperMenu.menuBar());
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         grid = new CellButton[width][length];
+        MineSweeper.setGrid(grid);
         for (int y = 0; y < length; y++) {
             for (int x = 0; x < width; x++) {
                 grid[x][y] = new CellButton();
                 grid[x][y].setSize(10, 10);
                 frame.add(grid[x][y]);
-                grid[x][y].addMouseListener(this);
+                grid[x][y].addMouseListener(new MouseListener() {
+
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        if (MineSweeper.isGameState()) {
+                            try {
+                                MouseHandler.HandleMouse(e, grid[x][y], board[x][y], frame);
+                            } catch (Exception ex) {
+                                Logger.getLogger(MineSweeperUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });
             }
         }
         AdjacentSquareAndButtonSetter.setAdjacentButtons(grid);
@@ -47,30 +80,8 @@ public class MineSweeperUI implements MouseListener {
         frame.setVisible(true);
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        if (MineSweeper.isGameState()) {
-            try {
-                MouseHandler.HandleMouse(e, grid, board, frame);
-            } catch (Exception ex) {
-                Logger.getLogger(MineSweeperUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+    public CellButton[][] getGrid() {
+        return grid;
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
 }

@@ -1,10 +1,21 @@
 package presenter;
 
+import model.CellButton;
 import model.Square;
 import view.MineSweeperUI;
 
 public class MineSweeper {
 
+    private static Square[][] board;
+    private static CellButton[][] grid;
+
+    public static CellButton[][] getGrid() {
+        return grid;
+    }
+
+    public static void setGrid(CellButton[][] grid) {
+        MineSweeper.grid = grid;
+    }
     private static String difficulty = "Beginner";
     private static boolean gameState = true;
     private static boolean noClicksYet = true;
@@ -60,7 +71,7 @@ public class MineSweeper {
                 setMines(40);
                 break;
         }
-        Square[][] board = new Square[getSize()][getSize()];
+        board = new Square[getSize()][getSize()];
         for (Square[] board1 : board) {
             for (int j = 0; j < board.length; j++) {
                 board1[j] = new Square();
@@ -80,5 +91,9 @@ public class MineSweeper {
 
     public static void main(String[] args) throws Exception {
         startGame(difficulty);
+    }
+
+    public static Square[][] getBoard() {
+        return board;
     }
 }

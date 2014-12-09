@@ -9,36 +9,31 @@ import model.Square;
 
 public class MouseHandler {
 
-    public static void HandleMouse(MouseEvent e, CellButton[][] grid, Square[][] board, JFrame frame) throws Exception {
-        CellButton src = (CellButton) e.getSource();
-        for (int x = 0; x < grid.length; x++) {
-            for (int y = 0; y < grid[x].length; y++) {
-                if (src == grid[x][y] && !board[x][y].getState().equals("REVEALED") && MineSweeper.isGameState()) {
-                    if (SwingUtilities.isRightMouseButton(e)) {
-                        FlagAndQuestionHandler.FlagAndQuestion(board[x][y], grid[x][y]);
-                        if (WinStateChecker.WinCheck(board, MineSweeper.getMines())) {
-                            JOptionPane.showMessageDialog(frame, "You won! Congratulations!", "Game Over", JOptionPane.PLAIN_MESSAGE);
-                            MineSweeper.setGameState(false);
-                        }
-                    }
-                    if (SwingUtilities.isLeftMouseButton(e)) {
-                        if (MineSweeper.isNoClicksYet()) {
-                            board[x][y].setState("REVEALED");
-                            MineLoader.FillBoard(board, MineSweeper.getMines());
-                            board[x][y].setState("HIDDEN");
-                            MineSweeper.setNoClicksYet(false);
-                        }
-                        MassSquareRevealer.RevealMassSquares(board[x][y], grid[x][y]);
-                        if (board[x][y].isMine()) {
-                            JOptionPane.showMessageDialog(frame, "Whoops! You stepped on a mine!", "Game Over", JOptionPane.ERROR_MESSAGE);
-                            MineRevealer.RevealMines(board, grid);
-                            MineSweeper.setGameState(false);
-                        }
-                        if (WinStateChecker.WinCheck(board, MineSweeper.getMines())) {
-                            JOptionPane.showMessageDialog(frame, "You won! Congratulations!", "Game Over", JOptionPane.PLAIN_MESSAGE);
-                            MineSweeper.setGameState(false);
-                        }
-                    }
+    public static void HandleMouse(MouseEvent e, CellButton cell, Square square, JFrame frame) throws Exception {
+        if (!square.getState().equals("REVEALED") && MineSweeper.isGameState()) {
+            if (SwingUtilities.isRightMouseButton(e)) {
+                FlagAndQuestionHandler.FlagAndQuestion(square, cell);
+                if (WinStateChecker.WinCheck(MineSweeper.getBoard(), MineSweeper.getMines())) {
+                    JOptionPane.showMessageDialog(frame, "You won! Congratulations!", "Game Over", JOptionPane.PLAIN_MESSAGE);
+                    MineSweeper.setGameState(false);
+                }
+            }
+            if (SwingUtilities.isLeftMouseButton(e)) {
+                if (MineSweeper.isNoClicksYet()) {
+                    square.setState("REVEALED");
+                    MineLoader.FillBoard(MineSweeper.getBoard(), MineSweeper.getMines());
+                    square.setState("HIDDEN");
+                    MineSweeper.setNoClicksYet(false);
+                }
+                MassSquareRevealer.RevealMassSquares(square, cell);
+                if (square.isMine()) {
+                    JOptionPane.showMessageDialog(frame, "Whoops! You stepped on a mine!", "Game Over", JOptionPane.ERROR_MESSAGE);
+                    MineRevealer.RevealMines(MineSweeper.getBoard(), MineSweeper.getGrid());
+                    MineSweeper.setGameState(false);
+                }
+                if (WinStateChecker.WinCheck(MineSweeper.getBoard(), MineSweeper.getMines())) {
+                    JOptionPane.showMessageDialog(frame, "You won! Congratulations!", "Game Over", JOptionPane.PLAIN_MESSAGE);
+                    MineSweeper.setGameState(false);
                 }
             }
         }
