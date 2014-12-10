@@ -9,7 +9,7 @@ public class MineRevealer {
             for (int j = 0; j < board.length; j++) {
                 if (board[i][j].isMine()) {
                     board[i][j].setState("REVEALED");
-                    board[i][j].setMine();
+                    board[i][j].showMine();
                 }
             }
         }
@@ -17,6 +17,6 @@ public class MineRevealer {
 
     public static void RevealMine(Square square) throws Exception {
         square.setState("REVEALED");
-        square.setMine();
+        square.showMine();
     }
 }

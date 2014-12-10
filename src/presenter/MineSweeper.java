@@ -71,7 +71,7 @@ public class MineSweeper {
                 board1[j] = new Square();
             }
         }
-        AdjacentSquareAndButtonSetter.setAdjacentSquares(board);
+        AdjacentSquareSetter.setAdjacentSquares(board);
         MineSweeperUI buttonGrid = new MineSweeperUI(getSize(), getSize(), board);
     }
 

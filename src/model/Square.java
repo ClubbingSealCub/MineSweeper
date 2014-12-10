@@ -10,7 +10,7 @@ public class Square extends JButton {
 
     private boolean mine;
     State state;
-    private final ArrayList<Square> adjacent;
+    private ArrayList<Square> adjacent;
 
     public boolean isMine() {
         return mine;
@@ -20,8 +20,12 @@ public class Square extends JButton {
         this.mine = mine;
     }
 
-    private enum State {
+    public void showMine() {
+        this.setText("B");
+        this.setBackground(Color.RED);
+    }
 
+    private enum State {
         HIDDEN, REVEALED, FLAGGED, QUESTION
     };
 
@@ -31,6 +35,11 @@ public class Square extends JButton {
         adjacent = new ArrayList();
     }
 
+    @Override
+    public String toString(){
+        return "a";
+    }
+    
     public String getState() {
         return state.toString();
     }
@@ -57,7 +66,7 @@ public class Square extends JButton {
 
     public void revealEnMasse() throws Exception {
         if (getState().equals("HIDDEN")) {
-            setState("REVEALED");
+            reveal();
             if (getNearbyMines() == 0) {
                 getAdjacent().stream().forEach((sq) -> {
                     try {
@@ -84,25 +93,23 @@ public class Square extends JButton {
         return counter;
     }
     
-     public void setMine() {
-        this.setText("B");
-        this.setBackground(Color.RED);
-    }
-
-    public void reveal(Square square) throws Exception {
-        if (!square.isMine()) {
-            this.setText(Integer.toString(square.getNearbyMines()));
+    public void reveal() throws Exception {
+        if (!isMine()) {
+            this.setText(Integer.toString(getNearbyMines()));
             this.setBackground(Color.GRAY);
+            this.setState("REVEALED");
         }
-        else setMine();
+        else showMine();
     }
 
     public void flag() throws Exception {
         this.setText("F");
+        this.setState("FLAGGED");
     }
 
     public void question() throws Exception {
         this.setText("?");
+        this.setState("QUESTION");
     }
 
 }

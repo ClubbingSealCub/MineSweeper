@@ -8,29 +8,37 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Square;
-import presenter.AdjacentSquareAndButtonSetter;
+import presenter.AdjacentSquareSetter;
 import presenter.MineSweeper;
 import presenter.MouseHandler;
 
 public class MineSweeperUI {
 
     static final JFrame frame = new JFrame("MineSweeper");
+
+    public static void DisplayWinningMessage() {
+        JOptionPane.showMessageDialog(frame, "Whoops! You stepped on a mine!", "Game Over", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public static void DisplayLosingMessage() {
+        JOptionPane.showMessageDialog(frame, "Whoops! You stepped on a mine!", "Game Over", JOptionPane.ERROR_MESSAGE);
+    }
     final Square[][] board;
 
     public static void Dispose() {
         frame.dispose();
     }
 
-    public MineSweeperUI(int width, int length, Square[][] sourceBoard) {
+    public MineSweeperUI(int width, int length, Square[][] sourceBoard) throws Exception {
         board = sourceBoard;
         frame.setLayout(new GridLayout(width, length));
         frame.setPreferredSize(new Dimension(width * 44, length * 44));
         frame.setResizable(false);
         frame.setJMenuBar(MineSweeperMenu.menuBar());
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        board = new Square[width][length];
-        MineSweeper.setBoard(board);
+        AdjacentSquareSetter.setAdjacentSquares(board);
         for (int y = 0; y < length; y++) {
             for (int x = 0; x < width; x++) {
                 board[x][y] = new Square();
@@ -42,7 +50,7 @@ public class MineSweeperUI {
                     public void mouseClicked(MouseEvent e) {
                         if (MineSweeper.isGameState()) {
                             try {
-                                MouseHandler.HandleMouse(e, grid[x][y], board[x][y], frame);
+                                MouseHandler.HandleMouse(e);
                             } catch (Exception ex) {
                                 Logger.getLogger(MineSweeperUI.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -51,34 +59,25 @@ public class MineSweeperUI {
 
                     @Override
                     public void mousePressed(MouseEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
 
                     @Override
                     public void mouseReleased(MouseEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
 
                     @Override
                     public void mouseEntered(MouseEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
 
                     @Override
                     public void mouseExited(MouseEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
                 });
             }
         }
-        AdjacentSquareAndButtonSetter.setAdjacentButtons(grid);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-    }
-
-    public CellButton[][] getGrid() {
-        return grid;
     }
 
 }

@@ -1,20 +1,25 @@
 package presenter;
 
 import java.awt.event.MouseEvent;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import model.CellButton;
 import model.Square;
+import view.MineSweeperUI;
 
 public class MouseHandler {
 
-    public static void HandleMouse(MouseEvent e, CellButton cell, Square square, JFrame frame) throws Exception {
-        if (!square.getState().equals("REVEALED") && MineSweeper.isGameState()) {
+    public static void HandleMouse(MouseEvent e) throws Exception {
+        Square square = (Square) e.getSource();
+        for (Square square2 : square.getAdjacent()) {
+            System.out.print(square2.toString());
+            System.out.println();
+        }
+
+        if (!square.getState()
+                .equals("REVEALED") && MineSweeper.isGameState()) {
             if (SwingUtilities.isRightMouseButton(e)) {
-                FlagAndQuestionHandler.FlagAndQuestion(square, cell);
+                FlagAndQuestionHandler.FlagAndQuestion(square);
                 if (WinStateChecker.WinCheck(MineSweeper.getBoard(), MineSweeper.getMines())) {
-                    JOptionPane.showMessageDialog(frame, "You won! Congratulations!", "Game Over", JOptionPane.PLAIN_MESSAGE);
+                    MineSweeperUI.DisplayWinningMessage();
                     MineSweeper.setGameState(false);
                 }
             }
@@ -25,14 +30,14 @@ public class MouseHandler {
                     square.setState("HIDDEN");
                     MineSweeper.setNoClicksYet(false);
                 }
-                MassSquareRevealer.RevealMassSquares(square, cell);
+                MassSquareRevealer.RevealMassSquares(square);
                 if (square.isMine()) {
-                    JOptionPane.showMessageDialog(frame, "Whoops! You stepped on a mine!", "Game Over", JOptionPane.ERROR_MESSAGE);
-                    MineRevealer.RevealMines(MineSweeper.getBoard(), MineSweeper.getGrid());
+                    MineSweeperUI.DisplayLosingMessage();
+                    MineRevealer.RevealMines(MineSweeper.getBoard());
                     MineSweeper.setGameState(false);
                 }
                 if (WinStateChecker.WinCheck(MineSweeper.getBoard(), MineSweeper.getMines())) {
-                    JOptionPane.showMessageDialog(frame, "You won! Congratulations!", "Game Over", JOptionPane.PLAIN_MESSAGE);
+                    MineSweeperUI.DisplayWinningMessage();
                     MineSweeper.setGameState(false);
                 }
             }

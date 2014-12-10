@@ -44,6 +44,7 @@ public class MineSweeperMenu {
         gameMenu.add(expert);
         gameMenu.addSeparator();
         gameMenu.add(new JMenuItem(ea));
+        gameMenu.add(exit);
         helpMenu.add(about);
         helpMenu.add(howToPlay);
         newGame.addActionListener((ActionEvent e) -> {
